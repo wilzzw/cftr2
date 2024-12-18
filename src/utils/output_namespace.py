@@ -37,3 +37,6 @@ def tprtop4traj(traj_id):
 
 def aligned_pdbfile(pdb_code: str):
     return os.path.expanduser(f"~/cftr2/data/topologies/{pdb_code.lower()}_aligned.pdb")
+
+def hole2_data(traj_id):
+    return os.path.expanduser(f'~/cftr/results/data/{traj_id}_hole2.npy')
