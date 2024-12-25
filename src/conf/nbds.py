@@ -5,7 +5,8 @@ from utils.dataset import read_trajdata, write_trajdata
 
 class nbdcom:
     def __init__(self, traj_ids):
-        self.traj_ids = traj_ids
+        # TODO: not very elegant to sort here
+        self.traj_ids = np.sort(traj_ids)
 
     def load_data(self, data_loc, df=True, **read_kwargs):
         # Currently does not support stride
@@ -13,7 +14,7 @@ class nbdcom:
             raise ValueError("nbdcom does not support stride")
         
         com_data = read_trajdata(data_loc, traj_ids=self.traj_ids, **read_kwargs)
-        output_dict = {"data": com_data, "nframes": com_data[1], "traj_ids": com_data[2]}
+        output_dict = {"data": com_data[0], "nframes": com_data[1], "traj_ids": com_data[2]}
 
         # Append with extra requested attributes
         if len(read_kwargs.get('attrs', [])) > 0:
